@@ -14,7 +14,7 @@ echo "<hr />";
 
 //FUNCTION ARGUMENTS
 function myCar($car) {
-    echo "$car<br>";
+    echo "My favorite car is $car<br>";
 }
 
 myCar("Volvo");
