@@ -22,12 +22,29 @@ $name = $website = $position = $experience = $estatus = $comments = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
-	$name = val($_POST["name"]);
-	$website = val($_POST["website"]);
-	$position = val($_POST["position"]);
-	$experience = val($_POST["experience"]);
-	$estatus = val($_POST["estatus"]);
-	$comments = val($_POST["comments"]);
+	if (empty($_POST["name"])) {
+		echo "<span class =\"error\"> Error : First name required </span> ";
+	// validation : name can only contain letters and white space
+	} elseif (!preg_match("/^[a-zA-Z\s]+$/", $_POST["name"])){
+
+		echo "<span class =\"error\"> Error : Name can only contain letters </span> ";	
+	} elseif (empty($_POST["website"])) {
+		echo "<span class =\"error\"> Error : Website required </span> ";
+	 
+	// validation : Website must be in correct format www.website.com 
+	} elseif (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $_POST["website"])){
+
+		echo "<span class =\"error\"> Error : Wrong format </span> ";	
+	} else {
+
+		$name = val($_POST["name"]);
+		$website = val($_POST["website"]);
+		$position = val($_POST["position"]);
+		$experience = val($_POST["experience"]);
+		$estatus = val($_POST["estatus"]);
+		$comments = val($_POST["comments"]);
+	}
+	
 }
 
 function val($data) {
